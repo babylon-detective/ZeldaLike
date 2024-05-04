@@ -14,6 +14,7 @@ const camera = new Camera()
 const world = new World(meshes.visuals)
 const player = new Player(meshes.player[0])
 const light = new Light()
+const graphic = new Graphic(scene, camera)
 
 
 
@@ -21,7 +22,9 @@ scene.add(world)
 scene.add(light)
 scene.add(player)
 
-const graphic = new Graphic(scene, camera)
-graphic.onUpdate(dt => {
+
+graphic.onUpdate((dt) => {
      
 })
+
+graphic.start()

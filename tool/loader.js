@@ -19,6 +19,6 @@ export default async function loadAssets(path) {
         }
     }
 
-    return {visuals, colliders, player` `}
+    return {visuals, colliders, player}
     
 }
