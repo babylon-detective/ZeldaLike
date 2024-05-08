@@ -1,4 +1,4 @@
-import { Object3D } from 'three'
+import { Object3D, Vector3 } from 'three'
 import physic from '../engine/physic'
 import { createRigidBodyEntity } from '../tool/function'
 import Gamepad from '../control/gamepad'
@@ -12,20 +12,18 @@ export default class Player extends Object3D {
 
     constructor(mesh) {
         super()
-        this.position.copy(mesh.position)
-        this.initPhysic(physic)
+        const origin = new Vector3(0,4,0)
+        this.initPhysic(physic, origin)
         this.initVisual(mesh)
     }
 
-    initPhysic(physic) {
-        const {rigidBody, collider} = createRigidBodyEntity(this.position, physic)
+    initPhysic(physic, origin) {
+        const {rigidBody, collider} = createRigidBodyEntity(origin, physic)
         this.rigidBody = rigidBody
         this.collider = collider
     }
 
     initVisual(mesh) {
-        mesh.position.set(0,0,0)
-        mesh.castShadow = true
         this.add(mesh)
     }
 

@@ -6,7 +6,7 @@ export default class Light extends Object3D {
         super()
         const ambient = new AmbientLight(0xffffff, 0.7)
         const point = new PointLight(0xffffff, 80, 30)
-        point.position.set(-4, 6, 6)
+        point.position.set(-2, 1, -1)
         point.castShadow = true
         point.shadow.bias = -0.001
         point.shadow.mapSize = new Vector2(2048, 2048)

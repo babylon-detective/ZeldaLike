@@ -3,11 +3,10 @@ import { createRigidBodyFixed } from '../tool/function'
 
 
 export default class World extends Object3D {
-
-    constructor(meshes, colliders, physic) {
+    constructor(visuals, colliders, physic) {
         super()
         this.initPhysic(colliders, physic)
-        this.initVisual(meshes)
+        this.initVisual(visuals)
     }
 
     initPhysic(meshes, physic) {
@@ -18,8 +17,8 @@ export default class World extends Object3D {
     }
 
     initVisual(meshes) {
-        for( const mesh of meshes) {
-            mesh.recieveShadow = true
+        for (const mesh of meshes) {
+            mesh.receiveShadow = true
             mesh.castShadow = true
             this.add(mesh)
         }

@@ -16,18 +16,19 @@ export default class Graphic extends WebGLRenderer {
         this.camera = camera
         this.cbLoop = this.loop.bind(this)
         this.shadowMap.enabled = true
+        this.loop()
     }
 
     loop() {
         const dt = this.clock.getDelta()
-        this.cbUpdate(dt)
+        if (this.cbUpdate) this.cbUpdate(dt) 
         this.render(this.scene, this.camera)
         requestAnimationFrame(this.cbLoop)
     }
 
-    start() {
-        this.loop()
-    }
+    // start() {
+    //     this.loop()
+    // }
 
     onUpdate(callback) {
         this.cbUpdate = callback

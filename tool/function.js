@@ -37,3 +37,11 @@ export function createRigidBodyEntity(position, physic) {
 export function floor(float, max = 0.2) {
   return Math.abs(float) < max ? 0 : float
 }
+
+export function browse(object, callback) {
+  if (object.isMesh) callback(object)
+  const children = object.children
+  for (let i = 0; i < children.lenght; i++) {
+    browse(children[i], callback)
+  }
+}
