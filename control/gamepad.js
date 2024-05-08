@@ -4,7 +4,7 @@ const ATTACK = 0
 const JUMP = 1
 const LOCK = 7
 const X = 0
-const Y = 1
+const Z = 1
 
 export default class Gamepad {
     get gamepad() {
@@ -18,7 +18,7 @@ export default class Gamepad {
 
     get z() {
         if (!this.gamepad) return 0
-        return this.gamepad.axes[Z]
+        return (this.gamepad.axes[Z])
     }
 
     get attack() {
