@@ -1,4 +1,4 @@
-import { floor } from '../tool/function' 
+import { floor, angle } from '../tool/function' 
 
 const ATTACK = 0
 const JUMP = 1
@@ -36,5 +36,12 @@ export default class Gamepad {
         return this.gamepad.buttons[LOCK].pressed
     }
 
+    get angle() {
+        return angle(this.x, this.z)
+    }
+
+    get moving() {
+      return Math.abs(this.x) ||Math.abs(this.z)   
+    }
 }
 
