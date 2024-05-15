@@ -1,8 +1,8 @@
 import { Object3D, Vector3 } from 'three'
-import physic from '../engine/physic'
-import { createRigidBodyEntity, range } from '../tool/function'
 import Gamepad from '../control/gamepad'
 import Animator from '../engine/animator'
+import { createRigidBodyEntity, range } from '../tool/function'
+// import physic from '../engine/physic'
 
 const SPEED = 3
 const ATTACK = 'attack1'
@@ -15,16 +15,16 @@ export default class Player extends Object3D {
     animator = null
     ctrl = new Gamepad()
 
-    constructor(mesh) {
+    constructor(mesh, physic) {
         super()
-        const origin = new Vector3(0,4,0)
+        const origin = new Vector3(0, 4, 0)
         this.initPhysic(physic, origin)
         this.initVisual(mesh)
         this.initAnimations(mesh)
     }
 
     initPhysic(physic, origin) {
-        const {rigidBody, collider} = createRigidBodyEntity(origin, physic)
+        const { rigidBody, collider } = createRigidBodyEntity(origin, physic)
         this.rigidBody = rigidBody
         this.collider = collider
     }
@@ -48,17 +48,19 @@ export default class Player extends Object3D {
     }
 
     updatePhysic() {
-    const x = this.ctrl.x * SPEED
-    const z = this.ctrl.z * SPEED
-    const y = this.rigidBody.linvel().y
-    this.rigidBody.setLinvel({x,y,z}, true)    
-}
+    const attack = this.ctrl.attack
+    let x = attack ? 0 : this.ctrl.x * SPEED 
+    let z = attack ? 0 : this.ctrl.z * SPEED
+    let y = this.rigidBody.linvel().y
+    this.rigidBody.setLinvel({ x, y, z}, true)    
+    }
 
     updateVisual(dt) {
         this.position.copy(this.rigidBody.translation())
-        if(this.ctrl.moving)
-        this.rotation.y += Range(this.ctrl.angle, this.rotation.y) * dt * 10
-    } 
+        if (this.ctrl.moving) {
+            this.rotation.y += range(this.ctrl.angle, this.rotation.y) * dt * 10
+        } 
+    }
 
     updateAnimation(dt) {
         if (this.ctrl.attack) {

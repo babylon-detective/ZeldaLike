@@ -30,12 +30,16 @@ export function createRigidBodyEntity(position, physic) {
   const rigidBodyDesc = RigidBodyDesc.dynamic()
   rigidBodyDesc.setTranslation(...position)
   const rigidBody = physic.createRigidBody(rigidBodyDesc)
-  const collider = createColliderBall(0.25, rigidBody, physic)
+  const collider = createColliderBall(0.1, rigidBody, physic)
   return { rigidBody, collider }
 }
 
 export function floor(float, max = 0.2) {
   return Math.abs(float) < max ? 0 : float
+}
+
+export function findByName(name, list) {
+  return list.find((a) => name === a.name)
 }
 
 export function browse(object, callback) {
@@ -46,16 +50,15 @@ export function browse(object, callback) {
   }
 }
 
-export function angle(x, z) {
+Math.angle = function angle(x, z) {
   return Math.atan2(-z, x) + Math.PI/2
 }
 
 export function range(angle1, angle2) {
   let angle = ((angle1 - angle2 + Math.PI) % (Math.PI * 2)) - Math.PI
-  angle < - Math.PI ? angle + Math.PI * 2 : angle 
+  angle < -Math.PI ? angle + Math.PI * 2 : angle 
   return angle 
 }
 
-export function findByName(name, list) {
-  return list.find(a=>name===a.name)
-}
+
+

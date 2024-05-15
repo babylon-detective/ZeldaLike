@@ -32,3 +32,4 @@ export default class Animator {
         this.mixer.update(dt)
     }
 }
+
